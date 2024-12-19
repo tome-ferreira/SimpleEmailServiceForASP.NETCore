@@ -1,0 +1,21 @@
+Adicionar em "appsettings.json"
+
+"EmailConfiguration": {
+  "From": "email@email.pt",
+  "SmtpServer": "mail.email.pt",
+  "Port": 465,
+  "Username": "email@email.pt",
+  "Password": "Password"
+},
+=====================================================================================================
+Adicionar em "Program.cs"
+
+No topo -> #using Projeto.ServicoEmail;#
+
+var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+
+builder.Services.AddScoped<Projeto.ServicoEmail.IEmailSender, EmailSender>();
+
+====================================================================================================
+Nos ficheiros do pacote mudar para o nome correto do projeto 

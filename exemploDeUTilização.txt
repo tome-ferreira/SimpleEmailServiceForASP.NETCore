@@ -1,0 +1,29 @@
+using oTeuSistema.ServicoEmail
+
+namespace oTeuSistema.Controllers
+{
+	private readonly IEmailSender emailSender;
+	
+	public WorkerController(IEmailSender emailSender)
+	{
+    		this.dbContext = dbContext;
+    		this.userManager = userManager;
+    		this.functions = functions;
+    		this.emailSender = emailSender;
+	}
+
+	public void SendEmail(string EmailParaEnviar, string Mensagem)
+	{
+		var message = new Message(new string[] { EmailParaEnviar }, "Assunto do email",
+    		new TextPart("html")
+    		{
+        		Text = "<p>Hi " + EmailParaEnviar + ".</p>" +
+				"<p> This is your message: " + Mensagem + "</p>" +
+				"<p>Goodbye!</p>"
+       	
+    		});
+
+		emailSender.SendEmail(message);
+	}
+		
+}
